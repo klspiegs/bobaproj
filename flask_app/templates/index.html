@@ -1,0 +1,63 @@
+{% extends "header.html" %}
+{% block content %}
+
+<div class="row">
+    <div class="col">
+        <form action="{{ url_for('boba.bsearch') }}" class="form-inline my-2 my-lg-0" method="POST">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-info">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            {{ form.csrf_token }}
+            {{ form.search_query(class="form-control", placeholder="search") }}
+
+            {% if form.search_query.errors %}
+            <div class="alert alert-warning" role="alert">
+                {% for error in form.search_query.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            {{ form.submit(class="btn btn-outline-success") }}
+        </form>
+    </div>
+    <div class="col">
+        <h2>search for boba places in your area to review! try gong cha or jumbo jumbo</h2>
+    </div>
+</div>
+<div class = "row">
+    <div class="col">
+        <form action="{{ url_for('boba.fsearch') }}" class="form-inline my-2 my-lg-0" method="POST">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-info">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            {{ form2.csrf_token }}
+            {{ form2.friend_search_query(class="form-control", placeholder="search") }}
+
+            {% if form2.friend_search_query.errors %}
+            <div class="alert alert-warning" role="alert">
+                {% for error in form2.friend_search_query.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            {{ form2.submit(class="btn btn-outline-success") }}
+        </form>
+    </div>
+</div>
+{% endblock %}
